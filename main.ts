@@ -9,7 +9,7 @@ const senders = new Map<string, Data[]>();
 const receivers= new Map<string, WebSocket>();
 
 Deno.serve(
-  {hostname: host, port: 8080},
+  {hostname: host, port: 8080, onListen: () => console.log(`Listening on ${host}:8080`)},
   (req) => {
     const upgrade  = req.headers.get("upgrade");
 
@@ -50,7 +50,7 @@ Deno.serve(
       console.log()
       if (receiver) {
         console.log(receiver)
-      };
+      }
 
       console.log(receiver)
 
@@ -73,5 +73,5 @@ Deno.serve(
     }
 
     return response;
-  }
+  },
 )
