@@ -1,14 +1,12 @@
 // import { Application, Router } from "https://deno.land/x/oak/mod.ts"
 import { Data, Sender } from "./types.ts";
-import { load } from "https://deno.land/std@0.173.0/dotenv/mod.ts"
-
-const env = await load();
-const host = env["HOST"] || "localhost";
+// import { load } from "https://deno.land/std@0.173.0/dotenv/mod.ts"
+import {serve} from 'https://deno.land/std/http/mod.ts'
 
 const senders = new Map<string, Data[]>();
 const receivers= new Map<string, WebSocket>();
 
-Deno.serve(
+serve(
   (req) => {
     const upgrade  = req.headers.get("upgrade");
 
